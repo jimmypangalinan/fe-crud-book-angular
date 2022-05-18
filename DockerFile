@@ -1,0 +1,6 @@
+FROM node:latest
+RUN mkdir /built
+COPY ${PWD} /app
+WORKDIR /built
+RUN ng build
+CMD ["ng s"]

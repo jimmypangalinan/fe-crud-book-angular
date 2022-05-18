@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ApiService } from '../shared/api.service';
 import { BookModel } from './book-dash board.model';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-book-dashboard',
@@ -27,7 +28,7 @@ export class BookDashboardComponent implements OnInit {
     this.getAllBook();
   }
 
-  clickAddBook(){
+  clickAddBook() {
     this.formValue.reset();
     this.showSave = true;
     this.showUpdate = false;
@@ -46,6 +47,13 @@ export class BookDashboardComponent implements OnInit {
         let ref = document.getElementById("cancel")
         ref?.click();
         this.formValue.reset();
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Succes Add New Book',
+          showConfirmButton: false,
+          timer: 2000
+        })
         this.getAllBook();
       },
         err => {
@@ -58,26 +66,47 @@ export class BookDashboardComponent implements OnInit {
     this.api.getBooks()
       .subscribe(res => {
         this.bookData = res;
+        console.log(res);
+
       })
   }
 
   // delete book by id
-  deleteBook(row: any){
-    this.api.deleteBook(row.id)
-    .subscribe(res=>{
-      alert("Book Deleted")
-      this.getAllBook();
+  deleteBook(row: any) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You want to delete the book!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.api.deleteBook(row._id)
+          .subscribe(res => {
+            this.getAllBook();
+          })
+        Swal.fire(
+          'Deleted!',
+          'Book has been deleted.',
+          'success'
+        )
+      }
     })
+
+
+
   }
 
 
   // show data by id 
-  onEditBook(row: any){
+  onEditBook(row: any) {
 
     this.showSave = false;
     this.showUpdate = true;
 
-    this.bookModelObj.id = row.id;
+    this.bookModelObj._id = row._id;
     this.formValue.controls['title'].setValue(row.title);
     this.formValue.controls['author'].setValue(row.author);
     this.formValue.controls['isbn'].setValue(row.isbn);
@@ -85,19 +114,25 @@ export class BookDashboardComponent implements OnInit {
 
 
   // update data by id after show by button edit
-  updateBookDetails(){
+  updateBookDetails() {
     this.bookModelObj.title = this.formValue.value.title;
     this.bookModelObj.author = this.formValue.value.author;
     this.bookModelObj.isbn = this.formValue.value.isbn;
 
-    this.api.updateBook(this.bookModelObj, this.bookModelObj.id)
-    .subscribe(res=>{
-      alert("Updated successfully");
-      let ref = document.getElementById("cancel")
-      ref?.click();
-      this.formValue.reset();
-      this.getAllBook();
-    })
+    this.api.updateBook(this.bookModelObj, this.bookModelObj._id)
+      .subscribe(res => {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Updated successfully',
+          showConfirmButton: false,
+          timer: 2000
+        })
+        let ref = document.getElementById("cancel")
+        ref?.click();
+        this.formValue.reset();
+        this.getAllBook();
+      })
   }
 
 }

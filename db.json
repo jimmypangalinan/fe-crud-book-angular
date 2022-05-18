@@ -1,42 +1,19 @@
 {
   "posts": [
     {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
+      "id": 15,
+      "title": "fdgsfdgsgffdtgeft",
+      "author": "fgdgsdfgdfggdfgdfg",
+      "isbn": "78578577547865"
     },
     {
-      "id": 10,
-      "title": "Dilan 1990",
-      "author": "Agus Setiawan",
-      "isbn": "33655785525"
-    },
-    {
-      "id": 11,
-      "title": "Mimpi Sejuta Dollar",
-      "author": "Merry Riana",
-      "isbn": "1232655485"
-    },
-    {
-      "id": 12,
-      "title": "Eragon",
-      "author": "Elizabeth ",
-      "isbn": "454567654545"
-    },
-    {
-      "id": 13,
-      "title": "ahgjgsghg",
-      "author": "jghjhghfh",
-      "isbn": "jkgjhghjfguyh"
+      "id": 16,
+      "title": "gtfdghfd",
+      "author": "fdgdfgdf",
+      "isbn": "ghfdgfd"
     }
   ],
-  "comments": [
-    {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
-    }
-  ],
+  "comments": [],
   "profile": {
     "name": "typicode"
   }

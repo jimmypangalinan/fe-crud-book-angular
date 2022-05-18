@@ -13,19 +13,19 @@
 <!-- Table  -->
 
 <div class="container">
-    <table class="table mt-5">
+    <table class="table table-striped mt-5">
         <thead>
             <tr>
-                <th scope="col">No.</th>
+                <th scope="col" class="text-center">No.</th>
                 <th scope="col" class="col-4">Title</th>
                 <th scope="col">Author</th>
                 <th scope="col">ISBN</th>
-                <th scope="col" class="text-center">Action</th>
+                <th scope="col" class=" col-2 text-center">Action</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let row of bookData;let i = index">
-                <td>{{i + 1}}</td>
+                <td class="text-center">{{i + 1}}</td>
                 <td>{{row.title}}</td>
                 <td>{{row.author}}</td>
                 <td>{{row.isbn}}</td>
@@ -57,11 +57,11 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Author</label>
-                            <input type="text" formControlName="author" class="form-control" id="exampleInputPassword1">
+                            <input type="text" formControlName="author" class="form-control" id="exampleInputPassword1" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">ISBN</label>
-                            <input type="text" formControlName="isbn" class="form-control" id="exampleInputPassword1">
+                            <input type="number" formControlName="isbn" class="form-control" id="exampleInputPassword1" required>
                         </div>
                     </form>
                 </div>
